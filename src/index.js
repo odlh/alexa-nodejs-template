@@ -14,7 +14,7 @@
 /**
  * App ID for the skill
  */
-var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
+var APP_ID = "undefined"; //replace undefined with amzn1.echo-sdk-ams.app.[your-unique-value-here];
 
 /**
  * The AlexaSkill prototype and helper functions
@@ -53,14 +53,19 @@ HelloWorld.prototype.eventHandlers.onSessionEnded = function (sessionEndedReques
     // any cleanup logic goes here
 };
 
-HelloWorld.prototype.intentHandlers = {
-    // register custom intent handlers
-    HelloWorldIntent: function (intent, session, response) {
-        response.tellWithCard("Hello World!", "Greeter", "Hello World!");
-    },
-    HelpIntent: function (intent, session, response) {
-        response.ask("You can say hello to me!");
-    }
+HelloWorld.prototype.eventHandlers.onIntent(intentRequest, session, response) = {
+    
+    var intent = intentRequest.intent,
+        intentName = intentRequest.intent.name;
+        
+        if(intentName ==- "HelloWorldIntent"){
+            response.tellWithCard("Hello World!", "Greeter", "Hello World!");
+        }
+        
+        if(intentName === "HelpIntent"){
+            response.ask("You can say hello to me!");
+        }
+
 };
 
 // Create the handler that responds to the Alexa Request.
